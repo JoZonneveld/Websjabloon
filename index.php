@@ -15,7 +15,6 @@
 <body>
 <?php
 session_start();
-include("include/connection.php");
 include("include/functions.php");
 require_once 'mobb/Mobile_Detect.php';
 $detect = new Mobile_Detect;

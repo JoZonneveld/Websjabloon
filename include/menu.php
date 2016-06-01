@@ -18,8 +18,17 @@
         			               	<a href="index.php?page=home">Home</a>
         			            </li>
         			            <li>
-        			                <a href="index.php?page=test">Test</a>
-        			            </li>
+                                    <a href="index.php?page=test">Test</a>
+                                </li>
+                                <li>
+                                    <a href="index.php?page=newMedewerker">Nieuwe medewerker</a>
+                                </li>
+                                <li>
+                                    <a href="index.php?page=updateMedewerker">Update medewerker</a>
+                                </li>
+                                <li>
+                                    <a href="index.php?page=deleteMedewerker">Delete medewerker</a>
+                                </li>
         			        </ul>
         			    </div>
         			    <!-- /.navbar-collapse -->

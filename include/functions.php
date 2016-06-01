@@ -1,55 +1,41 @@
 <?php
-      function insertIntoSystem($userName, $password, $email)
+
+      function connect()
       {
-            $connect = connectWithDatabase("localhost", "root", "", "registratiesysteem");
-
-            $password = md5($password);
-
-            $sql = "INSERT INTO `users` (`UserName`, `Password`, `Email`) VALUES ('" .$userName. "', '" .$password. "', '" .$email. "');";
-
-            $result = $connect->query($sql);
-      }
-
-      function selectFromSystem($id)
-      {
-            $connect = connectWithDatabase("localhost", "root", "", "registratiesysteem");
-
-            $select = "SELECT * FROM `users` WHERE Id='" .$id. "'";
-
-            $result = $connect->query($select);
-            return $result->fetch_all();
-      }
-
-      function deleteFromSystem($id)
-      {
-            $connect = connectWithDatabase("localhost", "root", "", "registratiesysteem");
-
-            $delete = "DELETE FROM `users` WHERE id='" .$id. "'";
+            $serverName       =     "localhost";
+            $userName         =     "root";
+            $password         =     "";
+            $dbName           =     "test";
             
-            $result = $connect->query($delete);
+            
+            $connect = new mysqli($serverName, $userName, $password, $dbName);
+            
+            if($connect->connect_error)
+            {
+                  die("Connection failed: " . $connect->connect_error);
+            } 
+            return $connect;
       }
 
-      function updateUsers($id, $newUserName, $newPassword, $newEmail)
+      function insertInMedewerker($naam)
       {
-            $connect = connectWithDatabase("localhost", "root", "", "registratiesysteem");
+            $connect = connect();
 
-            $update = "UPDATE `users` SET" 
-                  .($newUserName != null? ", UserName='" .$newUserName . "'" : "") 
-                  .($newPassword != null? ", Password='" .$newPassword . "'" : "") 
-                  .($newEmail != null? ", Email='" .$newEmail . "'" : "") 
-                  ."' WHERE id='" .$id. "';";
-            
-            $update = str_replace("SET,", "SET", $update);
-            
-            $result = $connect->query($update);
+            mysqli_query($connect,"INSERT INTO medewerker (id,naam) 
+                        VALUES ('','$naam')");
       }
 
-      function selectFromMedewerker($id)
+      function deleteFromMedewerker($userid)
       {
+            $connect = connect();
 
-            $select = "SELECT * FROM `medewerker`";
+            mysqli_query($connect,"DELETE FROM medewerker WHERE id = '$userid'");
+      }
 
-            $result = $connect->query($select);
-            return $result->fetch_all();
+      function updateMedewerker($userid, $naam)
+      {
+            $connect = connect();
+
+            mysqli_query($connect,"UPDATE medewerker SET naam = '$naam' where id = '$userid'");
       }
 ?>
